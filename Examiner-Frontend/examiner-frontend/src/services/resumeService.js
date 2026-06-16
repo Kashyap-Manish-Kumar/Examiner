@@ -9,6 +9,16 @@ export async function extractResume(
     file
   );
 
+  console.log(
+    "API URL:",
+    import.meta.env.VITE_API_URL
+  );
+
+  console.log(
+    "Request URL:",
+    `${import.meta.env.VITE_API_URL}/extract-resume`
+  );
+
   const response =
     await fetch(
       `${import.meta.env.VITE_API_URL}/extract-resume`,
@@ -17,6 +27,11 @@ export async function extractResume(
         body: formData,
       }
     );
+
+  console.log(
+    "Response Status:",
+    response.status
+  );
 
   if (!response.ok) {
     throw new Error(
