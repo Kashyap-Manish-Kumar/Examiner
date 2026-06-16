@@ -4,3 +4,6 @@ python-multipart
 PyPDF2
 pdfplumber
 python-docx
+openai-whisper
+PyMuPDF
+torch
