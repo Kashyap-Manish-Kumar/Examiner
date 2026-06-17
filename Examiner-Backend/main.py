@@ -48,18 +48,12 @@ async def extract_resume(
         return {
             "error": str(e)
         }
-
-
 @app.post("/transcribe")
-async def transcribe(
-    file: UploadFile = File(...)
-):
+async def transcribe(file: UploadFile = File(...)):
     temp_path = None
 
     try:
-        suffix = os.path.splitext(
-            file.filename
-        )[1] or ".webm"
+        suffix = os.path.splitext(file.filename)[1] or ".webm"
 
         with tempfile.NamedTemporaryFile(
             delete=False,
@@ -78,6 +72,10 @@ async def transcribe(
         return {
             "text": result["text"].strip()
         }
+
+    except Exception as e:
+        print("WHISPER ERROR:", e)
+        return {"error": str(e)}
 
     finally:
         if temp_path and os.path.exists(temp_path):
